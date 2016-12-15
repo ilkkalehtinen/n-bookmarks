@@ -1,0 +1,104 @@
+.nav-tabs > .active > a, .nav-tabs > .active > a:hover {
+  outline:none;
+}
+
+body {
+  padding-top: 50px;
+}
+
+textarea {
+  border: 1px solid #999999;
+  font-family: Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+  margin-top: -20px;
+  resize:vertical;
+}
+
+.bookmarks {
+    background: #f0f9ff; /* Old browsers */
+background: -moz-linear-gradient(top, #f0f9ff 0%, #cbebff 47%, #a1dbff 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f0f9ff), color-stop(47%,#cbebff), color-stop(100%,#a1dbff)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #f0f9ff 0%,#cbebff 47%,#a1dbff 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #f0f9ff 0%,#cbebff 47%,#a1dbff 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #f0f9ff 0%,#cbebff 47%,#a1dbff 100%); /* IE10+ */
+background: linear-gradient(to bottom, #f0f9ff 0%,#cbebff 47%,#a1dbff 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', endColorstr='#a1dbff',GradientType=0 ); /* IE6-9 */
+
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.nav navbar-nav active {
+    float: right;
+}
+
+.btn-default {
+    color: #333;
+    background-color: #FFF;
+    border-color: #CCC;
+    margin-left: 4px;
+}
+
+.quick_links {
+    /*background-color: #ffffff;*/
+    padding-top: 5px;
+    padding-bottom: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 2px;
+}
+
+.link_button {
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.add_link {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.add_category {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.remove_category {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.change_password {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.delete {
+    float: right;
+    background: none;
+    border: none;
+    color: SteelBlue;
+}
+
+.notes {
+    float: left;
+    background: none;
+    border: none;
+    margin-top: -12px;
+    color: SteelBlue;
+}
+
+.savenotes {
+    float: right;
+    height: 23px;
+}
+
+.glyphicon-asterisk {
+    color: red;
+    font-size: 4pt;
+    float: right;
+}
+
+:focus {
+    outline: -webkit-focus-ring-color auto 0px;
+}
