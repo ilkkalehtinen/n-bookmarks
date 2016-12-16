@@ -22,7 +22,7 @@ CodeIgniter <a href="https://www.codeigniter.com/userguide2/installation/index.h
 
   <ul>
     <li>Drag & drop support</li>
-    <li>AngularJS/ReactJS for the UI</li>
+    <li>Angular/React for the UI</li>
     <li>Browser compatible import/export</li>
     <li>.</li>
     <li>.</li>
