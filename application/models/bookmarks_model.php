@@ -40,7 +40,7 @@ class Bookmarks_model extends CI_Model {
     public function savePassword($password)
     {
         $data = array(
-            'password' => MD5($password)
+            'password' => password_hash($password, PASSWORD_DEFAULT)
         );
         $this->db->where('username', $this->username);
         $this->db->update('users', $data);
@@ -54,7 +54,7 @@ class Bookmarks_model extends CI_Model {
         }
         $row = array(
             'username' => $data["name"],
-            'password' => MD5($data["password"]),
+            'password' => password_hash($data["password"], PASSWORD_DEFAULT),
             'admin' => $admin,
             'bookmarks' => $this->getTemplate()
         );
@@ -64,7 +64,7 @@ class Bookmarks_model extends CI_Model {
     public function adminChangePassword($data)
     {
         $row = array(
-            'password' => MD5($data["password"])
+            'password' => password_hash($data["password"], PASSWORD_DEFAULT)
         );
         $this->db->where('id', $data["user"]);
         $this->db->update('users', $row);
