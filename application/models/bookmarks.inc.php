@@ -1,5 +1,6 @@
 <?php
 
+
 class Bookmark implements JsonSerializable
 {
     private $id;
@@ -234,6 +235,7 @@ class Bookmarks implements JsonSerializable
         ];
     }
 }
+
 
 class FileStore
 {

@@ -8,7 +8,7 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `users` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
-  `password` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `bookmarks` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`),
   FULLTEXT KEY `bookmarks` (`bookmarks`),
@@ -20,4 +20,4 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `bookmarks`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '{"bookmarks":[]}');
+(1, 'admin', '$2y$10$XUwxd2N5301tDItULECL0uiU4FI7JuCsMVTvpMBPT8ImQftsoU2s6', '{"bookmarks":[]}');
