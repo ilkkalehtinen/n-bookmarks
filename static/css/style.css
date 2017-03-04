@@ -123,6 +123,13 @@ textarea.form-control {
     margin-left: 4px;
 }
 
+#add_link {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+
 .quick_links {
     display: -webkit-flex;
 	display: flex;
