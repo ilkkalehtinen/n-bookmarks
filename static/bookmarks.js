@@ -225,8 +225,9 @@ function initActions(serverURL) {
     $("button[id$='notes-button']").click(function() {
         var form = "#" + this.id.replace("-button", "-form");
         $(form).fadeToggle("fast");
-
         var id = this.id.replace("-notes-button", "");
+        var saveButton = "#" + id + "-save-button";
+        $(saveButton).fadeToggle("fast");
         var span = "#span" + id;
         $(span).toggleClass(
             "glyphicon glyphicon-edit glyphicon glyphicon-collapse-up");
@@ -432,7 +433,6 @@ function initActions(serverURL) {
     $('#select_admin_button').click(function() {
         var user = encodeURIComponent($('#select_admin_user').val());
         var admin = $('#change_admin').is(":checked");
-        console.log(admin);
         $.ajax({
             type: "POST",
             url: serverURL,

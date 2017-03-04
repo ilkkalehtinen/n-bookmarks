@@ -1,3 +1,10 @@
+<!--
+ This file is part of nBookmarks.
+ Copyright (c) 2017 Ilkka Lehtinen
+
+ For the full copyright and license information, please view the license.txt
+ file that was distributed with this source code.
+-->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -68,24 +75,30 @@
 
     <script type="text/template" class="noteTemplate">
         <form id="<%= category.id %>-notes-form"
-            <% if (category.notes) { %>style="display: inline;"<% } %>
-            <% if (!category.notes) { %>style="display: none;"<% } %>
-            role="form">
-            <div class="form-group">
+              <% if (!category.notes) { %>style="display: none;"<% } %>
+              role="form"
+              class="notes-form"
+        >
+            <div class="textarea-wrapper">
                 <textarea spellcheck="false" class="form-control" wrap="off"
-                    rows="25" id="<%= category.id %>-notes"><%= category.notes %>
-                </textarea>
-                <button id="<%= category.id %>-save-button" class="savenotes">Save
-                </button>
+                    id="<%= category.id %>-notes"><%= category.notes %></textarea>
             </div>
         </form>
-        <button id="<%= category.id %>-notes-button" class="notes">
-            <span id="span<%= category.id %>"
-                  <% if (category.notes) { %>class="glyphicon glyphicon-collapse-up"<% } %>
-                  <% if (!category.notes) { %>class="glyphicon glyphicon-edit"<% } %>
-                  aria-hidden="true">
-            </span>
-        </button>
+        <div class="bottom-buttons">
+            <button id="<%= category.id %>-notes-button" class="notes">
+                <span id="span<%= category.id %>"
+                      <% if (category.notes) { %>class="glyphicon glyphicon-collapse-up"<% } %>
+                      <% if (!category.notes) { %>class="glyphicon glyphicon-edit"<% } %>
+                      aria-hidden="true">
+                </span>
+            </button>
+            <span class="growing-divider" />
+            <button id="<%= category.id %>-save-button"
+                    class="savenotes"
+                    <% if (!category.notes) { %>style="display: none;"<% } %>>
+                Save
+            </button>
+        </div>
     </script>
 
     <script type="text/template" class="contentTemplate">
@@ -135,4 +148,3 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-    <div class="container">

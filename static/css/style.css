@@ -1,42 +1,119 @@
-/*
- * This file is part of nBookmarks.
- * Copyright (c) 2017 Ilkka Lehtinen
- *
- * For the full copyright and license information, please view the license.txt
- * file that was distributed with this source code.
- */
-
 .nav-tabs > .active > a, .nav-tabs > .active > a:hover {
   outline:none;
 }
 
+html {
+  height: 100%;
+}
+
 body {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
   padding-top: 50px;
+  height: 100%;
 }
 
-textarea {
-  border: 1px solid #999999;
-  font-family: Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-  margin-top: -20px;
-  resize:vertical;
-}
-
-.bookmarks {
-    background: #f0f9ff; /* Old browsers */
-background: -moz-linear-gradient(top, #f0f9ff 0%, #cbebff 47%, #a1dbff 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f0f9ff), color-stop(47%,#cbebff), color-stop(100%,#a1dbff)); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top, #f0f9ff 0%,#cbebff 47%,#a1dbff 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top, #f0f9ff 0%,#cbebff 47%,#a1dbff 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top, #f0f9ff 0%,#cbebff 47%,#a1dbff 100%); /* IE10+ */
-background: linear-gradient(to bottom, #f0f9ff 0%,#cbebff 47%,#a1dbff 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', endColorstr='#a1dbff',GradientType=0 ); /* IE6-9 */
-
-    border-radius: 5px;
-    padding: 10px;
+.navbar {
+    display: flex;
 }
 
 .nav navbar-nav active {
     float: right;
+}
+
+.nav nav-tabs {
+    display: flex;
+}
+
+#bookmarks-content {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex: 2;
+    flex: 2;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    background: #f0f9ff; /* Old browsers */
+    background: -moz-linear-gradient(top, #f0f9ff 0%, #cbebff 47%, #ffffff 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f0f9ff), color-stop(47%,#cbebff), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #f0f9ff 0%,#cbebff 47%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #f0f9ff 0%,#cbebff 47%,#ffffff 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #f0f9ff 0%,#cbebff 47%,#ffffff 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #f0f9ff 0%,#cbebff 47%,#ffffff 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+}
+
+.tab-content {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-flex: 2;
+    flex: 2;
+}
+
+.tab-content > .active {
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    -webkit-flex: 2;
+    flex: 2;
+    height: 100%;
+}
+
+.notes-form {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-flex: 1 1 100%;
+    flex: 1 1 100%;
+}
+
+.textarea-wrapper {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-flex: 1 1 100%;
+    flex: 1 1 100%;
+}
+
+textarea {
+    border: 1px solid #999999;
+    font-family: Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+    margin-top: -20px;
+    resize:vertical;
+}
+
+textarea.form-control {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-flex: 1 1 100%;
+    flex: 1 1 100%;
+}
+
+.bottom-buttons {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.growing-divider {
+    -webkit-flex: 2;
+    flex: 2;
 }
 
 .btn-default {
@@ -47,7 +124,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', end
 }
 
 .quick_links {
-    /*background-color: #ffffff;*/
+    display: -webkit-flex;
+	display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    justify-content: center;
     padding-top: 5px;
     padding-bottom: 15px;
     margin-top: 10px;
@@ -92,13 +173,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', end
     float: left;
     background: none;
     border: none;
-    margin-top: -12px;
     color: SteelBlue;
 }
 
 .savenotes {
     float: right;
     height: 23px;
+}
+
+.glyphicon {
+    float: left;
 }
 
 .glyphicon-asterisk {
