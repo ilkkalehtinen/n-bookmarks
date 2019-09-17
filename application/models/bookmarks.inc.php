@@ -155,7 +155,7 @@ class Bookmarks implements JsonSerializable
 
     public function addCategory($data) {
         $itemID = uniqid();
-        $category = new Category($itemID, $data["name"]);
+        $category = new Category($itemID, $data["name"], '');
         $this->data[] = $category;
         return $itemID;
     }
