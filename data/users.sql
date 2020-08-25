@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `bookmarks` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `admin` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   FULLTEXT KEY `bookmarks` (`bookmarks`),
   FULLTEXT KEY `bookmarks_2` (`bookmarks`)
@@ -17,7 +18,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 --
 -- Initial data for table `users`
+-- 
+-- Admin password 'admin'.
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `bookmarks`) VALUES
-(1, 'admin', '$2y$10$XUwxd2N5301tDItULECL0uiU4FI7JuCsMVTvpMBPT8ImQftsoU2s6', '{"bookmarks":[]}');
+INSERT INTO `users` (`id`, `username`, `password`, `bookmarks`, `admin`) VALUES
+(1, 'admin', '$2y$10$XUwxd2N5301tDItULECL0uiU4FI7JuCsMVTvpMBPT8ImQftsoU2s6', '{"bookmarks":[]}', 1);
