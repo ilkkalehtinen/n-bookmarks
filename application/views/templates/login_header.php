@@ -11,12 +11,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>nBookmarks</title>
+    <title>Bookmarks</title>
 
     <!-- Bootstrap -->
     <link href="<?php echo $static_url;?>/libs/bootstrap/css/bootstrap.min.css"
-          rel="stylesheet">
-    <link href="<?php echo $static_url;?>/css/style.css"
           rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -26,8 +24,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
-
+  <body style="padding-top: 50px;">
     <nav class="navbar navbar-inverse navbar-fixed-top navbar-md">
       <div class="container">
         <div class="navbar-header">

@@ -17,6 +17,7 @@ class Bookmarks_model extends CI_Model {
         parent::__construct();
         if ($this->session->userdata('logged_in')) {
             $this->username = $this->session->userdata('logged_in')['username'];
+            $this->admin = $this->session->userdata('logged_in')['admin'];
             $this->bookmarks = new Bookmarks();
         }
     }
@@ -60,7 +61,7 @@ class Bookmarks_model extends CI_Model {
     public function addUser($data)
     {
         $admin = 0;
-        if ($data["admin"] == "true") {
+        if ($data["admin"] == "1") {
             $admin = 1;
         }
         $row = array(
@@ -90,7 +91,7 @@ class Bookmarks_model extends CI_Model {
     public function changeAdminUser($data)
     {
         $admin = 0;
-        if ($data["admin"] == "true") {
+        if ($data["admin"] == "1") {
             $admin = 1;
         }
         $row = array(
@@ -102,7 +103,7 @@ class Bookmarks_model extends CI_Model {
 
     public function getUsers()
     {
-        $this->db->select('id, username');
+        $this->db->select('id, username, admin');
         $query = $this->db->get('users');
         return $query->result();
     }
@@ -120,7 +121,7 @@ class Bookmarks_model extends CI_Model {
         return '{
             "bookmarks": [
                 {
-                    "id": 1,
+                    "id": "1",
                     "category": "Toolbar",
                     "bookmarks": [
                         {
@@ -131,11 +132,11 @@ class Bookmarks_model extends CI_Model {
                     ]
                 },
                 {
-                    "id": 3,
+                    "id": "3",
                     "category": "Sample",
                     "bookmarks": [
                         {
-                            "id": 4,
+                            "id": "4",
                             "name": "Google",
                             "url": "http:\/\/www.google.com"
                         }

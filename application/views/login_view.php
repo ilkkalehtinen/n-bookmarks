@@ -5,7 +5,7 @@
  For the full copyright and license information, please view the license.txt
  file that was distributed with this source code.
 -->
-<h3>nBookmarks login</h3>
+<h3>Bookmarks login</h3>
 <?php echo validation_errors(); ?>
 <?php
     $attributes = array('autocomplete' => 'on');

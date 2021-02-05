@@ -41,12 +41,41 @@ class Data extends CI_Controller {
                 $this->bookmarks_model->action($this->input->post());
             }
         }
+        else {
+          show_error('unauthorized', 401);
+        }
+    }
+
+    function user()
+    {
+        if ($this->session->userdata('logged_in')) {
+          echo json_encode($this->session->userdata('logged_in'));
+        }
+        else {
+          show_error('unauthorized', 401);
+        }
+    }
+
+    function users()
+    {
+        if (
+          $this->session->userdata('logged_in') &&
+          $this->session->userdata('logged_in')['admin'] === '1'
+        ) {
+          echo json_encode($this->bookmarks_model->getUsers());
+        }
+        else {
+          show_error('unauthorized', 401);
+        }
     }
 
     function index()
     {
         if ($this->session->userdata('logged_in')) {
             echo $this->bookmarks_model->get_bookmarks();
+        }
+        else {
+          show_error('unauthorized', 401);
         }
     }
 }
