@@ -1,7 +1,7 @@
 nBookmarks
 ==========
 
-<img src="http://www.ekoti.com/images/bookmarks.png"/>
+<img src="./images/bookmarks.png"/>
 
 nBookmarks is an application to maintain list of bookmarks and notes. It has been implemented with CodeIgniter 3.x (REST API), React, and Twitter Bootstrap.
 
@@ -30,6 +30,6 @@ CodeIgniter <a href="https://codeigniter.com/userguide3/installation/index.html"
 
 <h2>Screenshots</h2>
 
-<img src="http://www.ekoti.com/images/edit.png"/>
-<img src="http://www.ekoti.com/images/notes.png"/>
-<img src="http://www.ekoti.com/images/admin.png"/>
+<img src="./images/edit.png"/>
+<img src="./images/notes.png"/>
+<img src="./images/admin.png"/>
