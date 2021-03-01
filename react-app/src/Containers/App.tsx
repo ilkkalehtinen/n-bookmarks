@@ -6,8 +6,8 @@ import Nav from 'react-bootstrap/Nav'
 import Toast from 'react-bootstrap/Toast'
 import styled from 'styled-components'
 import { ToastContainer, Flip } from 'react-toastify';
-
-import { API_URL } from 'Constants/constants'
+import classNames from 'classnames'
+import { API_URL, PAGES } from 'Constants/constants'
 import Tabs from 'Components/Tabs'
 import QuickLinks from 'Components/QuickLinks'
 import Edit from 'Containers/Edit'
@@ -28,6 +28,7 @@ interface AppComponentProps {
   bookmarksActions: typeof bookmarksSliceActions
   user: LoggedInUser | null
   activeCategory: ActiveCategory
+  activePage: string
   loading: boolean
 }
 
@@ -48,12 +49,6 @@ const NavbarBrand = styled(Navbar.Brand)`
   color: #aaa;
 `
 
-const PAGES = {
-  BOOKMARKS: 'BOOKMARKS',
-  EDIT: 'EDIT',
-  ADMIN: 'ADMIN',
-}
-
 const App: FC<AppComponentProps> = ({
   data,
   quickLinks,
@@ -61,10 +56,9 @@ const App: FC<AppComponentProps> = ({
   bookmarksActions,
   user,
   activeCategory,
+  activePage,
   loading,
 }: AppComponentProps) => {
-  const [page, setPage] = useState(PAGES.BOOKMARKS)
-
   useEffect(() => {
     bookmarksActions.fetchUser()
     bookmarksActions.fetchBookmarks()
@@ -79,13 +73,13 @@ const App: FC<AppComponentProps> = ({
   }, [bookmarksActions])
 
   const toggleList = () =>
-    setPage(PAGES.BOOKMARKS)
+    bookmarksActions.setActivePage(PAGES.BOOKMARKS)
 
   const toggleEdit = () =>
-    setPage(PAGES.EDIT)
+    bookmarksActions.setActivePage(PAGES.EDIT)
 
   const toggleAdmin = () =>
-    setPage(PAGES.ADMIN)
+    bookmarksActions.setActivePage(PAGES.ADMIN)
 
   const renderBookmarks = () =>
     <React.Fragment>
@@ -122,7 +116,7 @@ const App: FC<AppComponentProps> = ({
         hideProgressBar
       />
       <Navbar className="py-0" bg="dark" expand="lg">
-        <NavbarBrand href="#home">Bookmars</NavbarBrand>
+        <NavbarBrand href="#home">Bookmarks</NavbarBrand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto" />
@@ -132,19 +126,43 @@ const App: FC<AppComponentProps> = ({
               onClick={(e: any) => e.preventDefault()}>
                 {user ? user.username : ''}
             </Nav.Link>
-            <Nav.Link href="" onClick={toggleList}>list</Nav.Link>
-            <Nav.Link href="" onClick={toggleEdit}>edit</Nav.Link>
+            <Nav.Link
+              href=""
+              onClick={toggleList}
+              className={
+                classNames({ 'text-underline': activePage === PAGES.BOOKMARKS})
+              }
+            >
+              list
+            </Nav.Link>
+            <Nav.Link
+              href=""
+              onClick={toggleEdit}
+              className={
+                classNames({ 'text-underline': activePage === PAGES.EDIT})
+              }
+            >
+              edit
+            </Nav.Link>
             {user && user.admin === "1" &&
-              <Nav.Link href="" onClick={toggleAdmin}>admin</Nav.Link>
+              <Nav.Link
+                href=""
+                onClick={toggleAdmin}
+                className={
+                  classNames({ 'text-underline': activePage === PAGES.ADMIN})
+                }
+              >
+                admin
+              </Nav.Link>
             }
             <Nav.Link href={`${API_URL}/home/logout`}>log out</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
       <ContentContainer id="bookmarks-content" className="container">
-        {!loading && page === PAGES.BOOKMARKS && renderBookmarks()}
-        {!loading && page === PAGES.EDIT && renderEdit()}
-        {!loading && page === PAGES.ADMIN && renderAdmin()}
+        {!loading && activePage === PAGES.BOOKMARKS && renderBookmarks()}
+        {!loading && activePage === PAGES.EDIT && renderEdit()}
+        {!loading && activePage === PAGES.ADMIN && renderAdmin()}
       </ContentContainer>
     </AppContainer>
   )
@@ -159,6 +177,7 @@ const mapStateToProps = (state: RootState) => {
   return {
     data: state.bookmarks.data,
     activeCategory: state.bookmarks.activeCategory,
+    activePage: state.bookmarks.activePage,
     quickLinks: state.bookmarks.quickLinks,
     user: state.bookmarks.user,
     loading: state.bookmarks.loading,

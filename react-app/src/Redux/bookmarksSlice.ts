@@ -9,7 +9,7 @@ import {
   LoggedInUser,
   ActiveCategory,
 } from 'types'
-import { API_ACTIONS } from 'Constants/constants'
+import { API_ACTIONS, PAGES } from 'Constants/constants'
 import { AppThunk } from './store'
 import {
   extractQuickLinks,
@@ -23,7 +23,8 @@ interface BookmarksState {
   quickLinks: BookmarkType[]
   user: LoggedInUser | null
   activeCategory: ActiveCategory
-  loading: boolean
+  loading: boolean,
+  activePage: string,
 }
 
 const initialState: BookmarksState = {
@@ -37,7 +38,8 @@ const initialState: BookmarksState = {
     note: '',
     noteEdited: false,
   },
-  loading: true
+  loading: true,
+  activePage: PAGES.BOOKMARKS,
 }
 
 const bookmarks = createSlice({
@@ -73,6 +75,9 @@ const bookmarks = createSlice({
         }
       }
     },
+    setActivePage(state, action: PayloadAction<string>) {
+      state.activePage = action.payload
+    },
     editNote(state, action: PayloadAction<string>) {
       state.activeCategory.note = action.payload
       state.activeCategory.noteEdited = true
@@ -84,6 +89,7 @@ export const {
   initBookmarks,
   initUser,
   setActiveCategory,
+  setActivePage,
   editNote,
 } = bookmarks.actions
 

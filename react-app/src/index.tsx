@@ -15,6 +15,13 @@ const store = configureStore({
   reducer: rootReducer,
 });
 
+window.addEventListener('beforeunload', function (e) {
+  if (store.getState().bookmarks.activeCategory.noteEdited) {
+    e.preventDefault()
+    e.returnValue = ''
+  }
+})
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

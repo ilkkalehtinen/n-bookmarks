@@ -16,3 +16,9 @@ export const API_ACTIONS = {
   REMOVE_USER: 'remove-user',
   CHANGE_ADMIN_USER: 'change-admin-user',
 }
+
+export const PAGES = {
+  BOOKMARKS: 'BOOKMARKS',
+  EDIT: 'EDIT',
+  ADMIN: 'ADMIN',
+}

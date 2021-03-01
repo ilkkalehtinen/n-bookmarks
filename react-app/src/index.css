@@ -45,6 +45,10 @@ a {
   color: #aaa;
 }
 
+.text-underline {
+  text-decoration: underline !important;
+}
+
 .nav-link.active {
   color: #555;
   cursor: default;
@@ -95,6 +99,7 @@ textarea {
   background-color: #fff;
   color: #333;
   border-radius: 4px;
+  outline: none;
 }
 
 .btnCustom:hover,

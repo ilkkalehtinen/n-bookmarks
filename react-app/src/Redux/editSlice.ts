@@ -11,10 +11,10 @@ import {
   EditValueAction,
   ChangePassword,
 } from 'types'
-import { API_ACTIONS } from 'Constants/constants'
+import { API_ACTIONS, PAGES } from 'Constants/constants'
 import { AppThunk } from './store'
 import { extractQuickLinks, setToValue } from './utils'
-import { fetchBookmarks} from 'Redux/bookmarksSlice'
+import { fetchBookmarks, setActivePage} from 'Redux/bookmarksSlice'
 
 export interface EditState {
   addBookmark: EditBookmarkType,
@@ -60,11 +60,15 @@ const edit = createSlice({
      updateValue(state, action: PayloadAction<EditValueAction>) {
        setToValue(state, action.payload.path, action.payload.value)
     },
+    clearValues(state) {
+      return initialState
+    }
   },
 })
 
 export const {
   updateValue,
+  clearValues,
 } = edit.actions
 
 export default edit.reducer
@@ -74,6 +78,8 @@ export const addBookmarkAndUpdate = (): AppThunk => async (dispatch, getState) =
   const bookmark = getState().edit.addBookmark
   try {
     await bookmarkAction(etag, bookmark, API_ACTIONS.ADD_BOOKMARK)
+    dispatch(clearValues())
+    dispatch(setActivePage(PAGES.BOOKMARKS))
     dispatch(fetchBookmarks())
     toast.success("Bookmark added")
   } catch (e) {
@@ -86,6 +92,8 @@ export const modifyBookmarkAndUpdate = (): AppThunk => async (dispatch, getState
   const bookmark = getState().edit.modifyBookmark
   try {
     await bookmarkAction(etag, bookmark, API_ACTIONS.MODIFY_BOOKMARK)
+    dispatch(clearValues())
+    dispatch(setActivePage(PAGES.BOOKMARKS))
     dispatch(fetchBookmarks())
     toast.success("Bookmark modified")
   } catch (e) {
@@ -99,6 +107,8 @@ export const deleteBookmarkAndUpdate = (bookmarkId: string): AppThunk =>
     const bookmark = { id: bookmarkId }
     try {
       await bookmarkAction(etag, bookmark, API_ACTIONS.REMOVE_BOOKMARK)
+      dispatch(clearValues())
+      dispatch(setActivePage(PAGES.BOOKMARKS))
       dispatch(fetchBookmarks())
     } catch (e) {
       toast.error("Outdated data. Please, reload data.");
@@ -110,6 +120,8 @@ export const addCategoryAndUpdate = (): AppThunk => async (dispatch, getState) =
   const category = getState().edit.addCategory
   try {
     await bookmarkAction(etag, category, API_ACTIONS.ADD_CATEGORY)
+    dispatch(clearValues())
+    dispatch(setActivePage(PAGES.BOOKMARKS))
     dispatch(fetchBookmarks())
     toast.success("Category added")
   } catch (e) {
@@ -122,6 +134,8 @@ export const removeCategoryAndUpdate = (): AppThunk => async (dispatch, getState
   const category = getState().edit.removeCategory
   try {
     await bookmarkAction(etag, category, API_ACTIONS.REMOVE_CATEGORY)
+    dispatch(clearValues())
+    dispatch(setActivePage(PAGES.BOOKMARKS))
     dispatch(fetchBookmarks())
     toast.success("Category removed")
   } catch (e) {
@@ -134,6 +148,8 @@ export const modifyCategoryAndUpdate = (): AppThunk => async (dispatch, getState
   const category = getState().edit.modifyCategory
   try {
     await bookmarkAction(etag, category, API_ACTIONS.RENAME_CATEGORY)
+    dispatch(clearValues())
+    dispatch(setActivePage(PAGES.BOOKMARKS))
     dispatch(fetchBookmarks())
     toast.success("Category modified")
   } catch (e) {
@@ -146,6 +162,8 @@ export const changePassword = (): AppThunk => async (dispatch, getState) => {
   const user = getState().edit.changePassword
   try {
     await bookmarkAction(etag, user, API_ACTIONS.CHANGE_PASSWORD)
+    dispatch(clearValues())
+    dispatch(setActivePage(PAGES.BOOKMARKS))
     toast.success("Password changed");
   } catch (e) {
     toast.error("Password changing failed");
