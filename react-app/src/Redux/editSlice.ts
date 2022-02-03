@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify';
 
 import {
-  getBookmarks,
   bookmarkAction,
  } from 'Redux/api'
 import {
@@ -13,7 +12,7 @@ import {
 } from 'types'
 import { API_ACTIONS, PAGES } from 'Constants/constants'
 import { AppThunk } from './store'
-import { extractQuickLinks, setToValue } from './utils'
+import { setToValue } from './utils'
 import { fetchBookmarks, setActivePage} from 'Redux/bookmarksSlice'
 
 export interface EditState {
@@ -60,7 +59,7 @@ const edit = createSlice({
      updateValue(state, action: PayloadAction<EditValueAction>) {
        setToValue(state, action.payload.path, action.payload.value)
     },
-    clearValues(state) {
+    clearValues() {
       return initialState
     }
   },

@@ -1,7 +1,11 @@
-import { CategoryType, ActiveCategory } from 'types'
+import {
+  CategoryType,
+  ActiveCategory,
+  BookmarkType,
+} from 'types'
 
 
-export const extractQuickLinks = (data: CategoryType[]) => {
+export const extractQuickLinks = (data: CategoryType[]): BookmarkType[] => {
   const toolbar = data.find(category => category.category === 'Toolbar')
 
   if (toolbar && toolbar.bookmarks) {
@@ -11,7 +15,7 @@ export const extractQuickLinks = (data: CategoryType[]) => {
   }
 }
 
-export const sortBookmarkData = (data: CategoryType[]) => {
+export const sortBookmarkData = (data: CategoryType[]): CategoryType[] => {
   const bookmarks = data.sort((a, b) =>
     a.category.localeCompare(b.category)
   )
@@ -24,7 +28,10 @@ export const sortBookmarkData = (data: CategoryType[]) => {
   }))
 }
 
-export const getActiveCategory = (data: CategoryType[], activeCategory: ActiveCategory) => {
+export const getActiveCategory = (
+  data: CategoryType[],
+  activeCategory: ActiveCategory,
+): ActiveCategory => {
   let newActiveCategory = {
     id: data[0].id,
     name: data[0].category,
@@ -47,7 +54,8 @@ export const getActiveCategory = (data: CategoryType[], activeCategory: ActiveCa
   return newActiveCategory
 }
 
-export const setToValue = (obj: any, path: Array<string>, value: any) => {
+// eslint-disable-next-line
+export const setToValue = (obj: any, path: Array<string>, value: any): any => {
     let i;
     for (i = 0; i < path.length - 1; i++)
         obj = obj[path[i]];

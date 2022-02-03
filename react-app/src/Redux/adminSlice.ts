@@ -2,12 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify';
 
 import {
-  getBookmarks,
   getUsers,
   bookmarkAction,
  } from 'Redux/api'
 import {
-  EditValueAction,
+  EditAdminValueAction,
   UserType,
   AddUserType,
   LoggedInUser,
@@ -15,7 +14,6 @@ import {
 import { API_ACTIONS } from 'Constants/constants'
 import { AppThunk } from './store'
 import { setToValue } from './utils'
-import { fetchBookmarks} from 'Redux/bookmarksSlice'
 
 export interface AdminState {
   user: AddUserType
@@ -53,7 +51,7 @@ const admin = createSlice({
   name: 'admin',
   initialState,
   reducers: {
-     updateValue(state, action: PayloadAction<EditValueAction>) {
+     updateValue(state, action: PayloadAction<EditAdminValueAction>) {
        setToValue(state, action.payload.path, action.payload.value)
     },
     updateUsers(state, action: PayloadAction<LoggedInUser[]>) {
@@ -69,7 +67,7 @@ export const {
 
 export default admin.reducer
 
-export const fetchUsers = (): AppThunk => async (dispatch, getState) => {
+export const fetchUsers = (): AppThunk => async (dispatch) => {
   try {
     const users = await getUsers()
     dispatch(updateUsers(users))

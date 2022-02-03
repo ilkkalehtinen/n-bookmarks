@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux'
 import styled from 'styled-components'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import Col from 'react-bootstrap/Col'
 
 import * as editSliceActions from 'Redux/editSlice'
 import { RootState } from 'Redux/rootReducer'
@@ -14,14 +13,6 @@ import FormInput from 'Components/FormInput'
 import FormPassword from 'Components/FormPassword'
 import FormSelect from 'Components/FormSelect'
 
-const FormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
-const FormField = styled.div`
-  display: flex;
-`
 
 const StyledFormLabel = styled(Form.Label)`
   width: 115px;

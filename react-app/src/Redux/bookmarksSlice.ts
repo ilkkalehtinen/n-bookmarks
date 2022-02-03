@@ -18,17 +18,18 @@ import {
 } from './utils'
 
 interface BookmarksState {
-  etag: string
+  etag: number
   data: CategoryType[]
   quickLinks: BookmarkType[]
   user: LoggedInUser | null
   activeCategory: ActiveCategory
   loading: boolean,
   activePage: string,
+  search: string,
 }
 
 const initialState: BookmarksState = {
-  etag: '',
+  etag: 0,
   data: [],
   quickLinks: [],
   user: null,
@@ -40,6 +41,7 @@ const initialState: BookmarksState = {
   },
   loading: true,
   activePage: PAGES.BOOKMARKS,
+  search: '',
 }
 
 const bookmarks = createSlice({
@@ -59,7 +61,7 @@ const bookmarks = createSlice({
       state.quickLinks = extractQuickLinks(bookmarks)
       state.loading = false
     },
-    initUser(state, action: PayloadAction<LoggedInUser>) {
+    initUser(state, action: PayloadAction<LoggedInUser | null>) {
       state.user = action.payload
     },
     setActiveCategory(state, action: PayloadAction<string>) {
@@ -82,6 +84,14 @@ const bookmarks = createSlice({
       state.activeCategory.note = action.payload
       state.activeCategory.noteEdited = true
     },
+    search(state, action: PayloadAction<string>) {
+      if (action.payload) {
+        state.activePage = PAGES.SEARCH;
+      } else {
+        state.activePage = PAGES.BOOKMARKS;
+      }
+      state.search = action.payload;
+    }
   },
 })
 
@@ -91,6 +101,7 @@ export const {
   setActiveCategory,
   setActivePage,
   editNote,
+  search,
 } = bookmarks.actions
 
 export default bookmarks.reducer

@@ -1,4 +1,9 @@
-export const getBookmarks = async (): Promise<any>  => {
+import {
+  BookmarksDataType,
+  LoggedInUser
+} from 'types'
+
+export const getBookmarks = async (): Promise<BookmarksDataType>  => {
   return Promise.resolve(
     {
       "etag": 1613116426,
@@ -31,20 +36,25 @@ export const getBookmarks = async (): Promise<any>  => {
   });
 }
 
-export const getUser = async (): Promise<any> => {
+export const getUser = async (): Promise<LoggedInUser> => {
   return Promise.resolve(
     {"id":"1","username":"admin","admin":"1"}
   )
 }
 
-export const getUsers = async (): Promise<any> => {
+export const getUsers = async (): Promise<LoggedInUser[]> => {
   return Promise.resolve([
     {"id":"1","username":"admin","admin":"1"},
     {"id":"2","username":"test","admin":"0"}
   ])
 }
 
-export const bookmarkAction = async (etag: string, data: any, action: string): Promise<any> => {
+export const bookmarkAction = async (
+  etag: number,
+  // eslint-disable-next-line
+  data: any,
+  action: string
+): Promise<void> => {
   const postData = {
     etag,
     action,

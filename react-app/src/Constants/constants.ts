@@ -21,4 +21,5 @@ export const PAGES = {
   BOOKMARKS: 'BOOKMARKS',
   EDIT: 'EDIT',
   ADMIN: 'ADMIN',
+  SEARCH: 'SEARCH',
 }

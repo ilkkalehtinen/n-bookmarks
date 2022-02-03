@@ -23,4 +23,4 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `bookmarks`, `admin`) VALUES
-(1, 'admin', '$2y$10$XUwxd2N5301tDItULECL0uiU4FI7JuCsMVTvpMBPT8ImQftsoU2s6', '{"bookmarks":[]}', 1);
+(1, 'admin', '$2y$10$XUwxd2N5301tDItULECL0uiU4FI7JuCsMVTvpMBPT8ImQftsoU2s6', null, 1);

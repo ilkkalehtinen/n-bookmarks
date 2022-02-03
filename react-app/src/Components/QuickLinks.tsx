@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import Button from 'react-bootstrap/Button'
 import styled from 'styled-components'
 import { FaSync } from 'react-icons/fa'
 

@@ -35,9 +35,10 @@
   },
   "scripts": {
     "start": "BROWSER=none react-scripts start",
-    "build": "react-scripts build && if [ -d '../static/build' ]; then rm -r ../static/build; fi && mv build ../static",
+    "build": "react-scripts build && mv build/* ../",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint --ext=js,jsx,ts,tsx src"
   },
   "eslintConfig": {
     "extends": [

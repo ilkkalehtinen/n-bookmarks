@@ -28,13 +28,9 @@ class Bookmarks_model extends CI_Model {
         $this->db->from('users');
         $this->db->where('username', $this->username);
 
-        $data = $this->db-> get()->row()->bookmarks;
+        $data = $this->db->get()->row()->bookmarks;
         if ($data) {
-            if ($data[0] == '{') {
-                return $data;
-            } else {
-                return $this->encryption->decrypt($data);
-            }
+            return $this->encryption->decrypt($data);
         }
         else {
             return $this->initData();
@@ -119,6 +115,7 @@ class Bookmarks_model extends CI_Model {
 
     private function getTemplate() {
         return '{
+            "etag": 1,
             "bookmarks": [
                 {
                     "id": "1",
@@ -149,6 +146,6 @@ class Bookmarks_model extends CI_Model {
     private function initData()
     {
         $this->putData($this->getTemplate());
-        return $template;
+        return $this->get_bookmarks();
     }
 }

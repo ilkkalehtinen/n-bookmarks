@@ -1,19 +1,19 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-import Toast from 'react-bootstrap/Toast'
+import Form from 'react-bootstrap/Form'
 import styled from 'styled-components'
 import { ToastContainer, Flip } from 'react-toastify';
 import classNames from 'classnames'
 import { API_URL, PAGES } from 'Constants/constants'
 import Tabs from 'Components/Tabs'
+import Search from 'Components/Search'
 import QuickLinks from 'Components/QuickLinks'
 import Edit from 'Containers/Edit'
 import Admin from 'Containers/Admin'
 import { CategoryType, BookmarkType, LoggedInUser, ActiveCategory } from 'types'
-import { fetchBookmarks, fetchUser } from 'Redux/bookmarksSlice'
 import * as editSliceActions from 'Redux/editSlice'
 import * as bookmarksSliceActions from 'Redux/bookmarksSlice'
 import { AppDispatch } from 'Redux/store'
@@ -29,7 +29,8 @@ interface AppComponentProps {
   user: LoggedInUser | null
   activeCategory: ActiveCategory
   activePage: string
-  loading: boolean
+  loading: boolean,
+  search: string,
 }
 
 const AppContainer = styled.div`
@@ -49,6 +50,13 @@ const NavbarBrand = styled(Navbar.Brand)`
   color: #aaa;
 `
 
+const SearchInput = styled(Form.Control)`
+  width: 150px;
+  height: 20px;
+  margin-right: 20px;
+  background-color: #ddd;
+`
+
 const App: FC<AppComponentProps> = ({
   data,
   quickLinks,
@@ -58,6 +66,7 @@ const App: FC<AppComponentProps> = ({
   activeCategory,
   activePage,
   loading,
+  search,
 }: AppComponentProps) => {
   useEffect(() => {
     bookmarksActions.fetchUser()
@@ -97,6 +106,9 @@ const App: FC<AppComponentProps> = ({
       />
     </React.Fragment>
 
+  const renderSearch = () =>
+    <Search data={data} search={search} />
+
   const renderEdit = () =>
     <Edit />
 
@@ -120,9 +132,14 @@ const App: FC<AppComponentProps> = ({
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto" />
+          {/* eslint-disable-next-line */}
+          <SearchInput type="text" placeholder="Search..." onChange={(e: any) => {
+            bookmarksActions.search(e.target.value);
+          }} />
           <Nav>
             <Nav.Link
               href=""
+              // eslint-disable-next-line
               onClick={(e: any) => e.preventDefault()}>
                 {user ? user.username : ''}
             </Nav.Link>
@@ -163,6 +180,7 @@ const App: FC<AppComponentProps> = ({
         {!loading && activePage === PAGES.BOOKMARKS && renderBookmarks()}
         {!loading && activePage === PAGES.EDIT && renderEdit()}
         {!loading && activePage === PAGES.ADMIN && renderAdmin()}
+        {!loading && activePage === PAGES.SEARCH && renderSearch()}
       </ContentContainer>
     </AppContainer>
   )
@@ -181,6 +199,7 @@ const mapStateToProps = (state: RootState) => {
     quickLinks: state.bookmarks.quickLinks,
     user: state.bookmarks.user,
     loading: state.bookmarks.loading,
+    search: state.bookmarks.search,
   }
 }
 

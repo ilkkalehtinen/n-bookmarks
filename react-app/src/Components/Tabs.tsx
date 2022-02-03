@@ -1,18 +1,14 @@
 import React, { FC } from 'react';
-import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
 import ListGroup from 'react-bootstrap/ListGroup'
 import styled from 'styled-components'
 import { FaTrashAlt } from 'react-icons/fa'
 import Form from 'react-bootstrap/Form'
 import Nav from 'react-bootstrap/Nav'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 
 import { CategoryType, BookmarkType, ActiveCategory } from 'types'
 import * as editSliceActions from 'Redux/editSlice'
 import * as bookmarksSliceActions from 'Redux/bookmarksSlice'
-import QuickLinks from './QuickLinks'
 
 interface TabsComponentProps {
   data: CategoryType[],
@@ -41,7 +37,6 @@ const StyledFormGroup = styled(Form.Group)`
 
 const TabsComponent: FC<TabsComponentProps> = ({
   data,
-  quickLinks,
   editActions,
   bookmarksActions,
   activeCategory,
@@ -84,6 +79,7 @@ const TabsComponent: FC<TabsComponentProps> = ({
                     onChange={(e) =>
                       bookmarksActions.editNote(e.target.value)
                     }
+                    // eslint-disable-next-line
                     onKeyDown={(e: any) => {
                       if ((e.ctrlKey || e.metaKey) && e.which === 83) {
                         bookmarksActions.saveNote()

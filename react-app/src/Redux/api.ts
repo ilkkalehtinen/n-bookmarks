@@ -1,52 +1,58 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 import { API_URL } from 'Constants/constants'
 import {
-  CategoryType,
-  EditBookmarkType,
-  EditCategoryType,
+  BookmarksDataType,
+  LoggedInUser,
 } from 'types'
 
 const dataApiUrl = `${API_URL}/data`;
 const actionApiUrl = `${API_URL}/data/action`;
 
-const logoutOrThrow = (e: any) => {
-  if (e.response.status === 401) {
+const logoutOrThrow = (e: AxiosError) => {
+  if (e.response && e.response.status === 401) {
     window.location.href = `${API_URL}/login`
   } else {
     throw(e)
   }
 }
 
-export const getBookmarks = async (): Promise<any>  => {
+export const getBookmarks = async (): Promise<BookmarksDataType>  => {
   try {
-    const response = await axios.get<CategoryType[]>(dataApiUrl)
+    const response = await axios.get<BookmarksDataType>(dataApiUrl)
     return response.data
   } catch(e) {
-    logoutOrThrow(e)
+    logoutOrThrow(<AxiosError>e)
+    return { etag: 0, bookmarks: []}
   }
 }
 
-export const getUser = async (): Promise<any> => {
+export const getUser = async (): Promise<LoggedInUser | null> => {
   try {
-    const response = await axios.get<CategoryType[]>(`${dataApiUrl}/user`)
+    const response = await axios.get<LoggedInUser>(`${dataApiUrl}/user`)
     return response.data
   } catch(e) {
-    logoutOrThrow(e)
+    logoutOrThrow(<AxiosError>e)
+    return null
   }
 }
 
-export const getUsers = async (): Promise<any> => {
+export const getUsers = async (): Promise<LoggedInUser[]> => {
   try {
-    const response = await axios.get<CategoryType[]>(`${dataApiUrl}/users`)
+    const response = await axios.get<LoggedInUser[]>(`${dataApiUrl}/users`)
     return response.data
   } catch(e) {
-    logoutOrThrow(e)
+    logoutOrThrow(<AxiosError>e)
+    return []
   }
 }
 
-
-export const bookmarkAction = async (etag: string, data: any, action: string): Promise<any> => {
+export const bookmarkAction = async (
+  etag: number,
+  // eslint-disable-next-line
+  data: any,
+  action: string,
+): Promise<void> => {
   const postData = {
     etag,
     action,
@@ -59,6 +65,6 @@ export const bookmarkAction = async (etag: string, data: any, action: string): P
   try {
     return axios.post(actionApiUrl, formData)
   } catch(e) {
-    logoutOrThrow(e)
+    logoutOrThrow(<AxiosError>e)
   }
 }

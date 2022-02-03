@@ -9,7 +9,7 @@ export type EditBookmarkType = {
   id?: string
   name: string
   url: string
-  category: string
+  category?: string
 }
 
 export type EditCategoryType = {
@@ -25,12 +25,17 @@ export type CategoryType = {
 }
 
 export type EditValueAction = {
-  value: any
+  value: string | EditBookmarkType
+  path: Array<string>
+}
+
+export type EditAdminValueAction = {
+  value: string
   path: Array<string>
 }
 
 export type BookmarksDataType = {
-  etag: string
+  etag: number
   bookmarks: CategoryType[]
 }
 

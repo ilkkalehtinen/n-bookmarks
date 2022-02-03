@@ -1,35 +1,47 @@
-nBookmarks
-==========
+# nBookmarks
 
-<img src="./images/bookmarks.png"/>
+![bookmarks](./images/bookmarks.png)
 
 nBookmarks is an application to maintain list of bookmarks and notes. It has been implemented with CodeIgniter 3.x (REST API), React, and Twitter Bootstrap.
 
-<h2>Features</h2>
-  <ul>
-     <li>Add and modify bookmark entries by category</li>
-     <li>Add notes</li>
-     <li>Basic authentication</li>
-     <li>Admin interface to manage users</li>
-     <li>Basic optimistic locking</li>
-  </ul>
+## Features
 
-<h2>Installation</h2>
+- Add and modify bookmark entries by category
+- Add notes
+- Basic authentication
+- Admin interface to manage users
+- Basic optimistic locking
+- Search
 
-CodeIgniter <a href="https://codeigniter.com/userguide3/installation/index.html">installation instructions</a>
+## Installation
 
-<h2>TODO</h2>
+CodeIgniter [installation instructions](https://codeigniter.com/userguide3/installation/index.html)
 
-  <ul>
-    <li>Drag & drop support</li>
-    <li>Browser compatible import/export</li>
-    <li>.</li>
-    <li>.</li>
-    <li>.</li>
-  </ul>
+### Basic setup
 
-<h2>Screenshots</h2>
+1. Define database settings: `/application/config/database.php`
+2. Create DB table with `/data/users.sql`
+3. Set encryption key: `/application/config/config.php`, `$config['encryption_key']`
+4. Build react-app: `npm install && npm run build`
 
-<img src="./images/edit.png"/>
-<img src="./images/notes.png"/>
-<img src="./images/admin.png"/>
+### Changing base URL
+
+1. Change `$config['base_url']` in `/application/config/config.php`
+2. Change `REACT_APP_API_URL` in `/application/react-app/.env`
+3. (Change default static resources location in `/application/controllers/Home.php` and package.json's `homepage` field.)
+
+### Todo
+
+- Drag &  drop support
+- Browser compatible import/export
+- .
+- .
+- .
+
+## Screenshots
+
+![](./images/edit.png)
+
+![](./images/notes.png)
+
+![](./images/admin.png)
