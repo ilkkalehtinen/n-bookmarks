@@ -85,7 +85,7 @@ const bookmarks = createSlice({
       state.activeCategory.noteEdited = true
     },
     search(state, action: PayloadAction<string>) {
-      if (action.payload) {
+      if (action.payload && action.payload.length >= 3) {
         state.activePage = PAGES.SEARCH;
       } else {
         state.activePage = PAGES.BOOKMARKS;

@@ -16,7 +16,7 @@ const SearchComponent: FC<SearchComponentProps> = ({
 
   data.map((category) => {
     category.bookmarks.map((bookmark) => {
-      if (bookmark.name.includes(search)) {
+      if (bookmark.name.toLowerCase().includes(search.toLowerCase())) {
         bookmarks.push(bookmark);
       }
     })
