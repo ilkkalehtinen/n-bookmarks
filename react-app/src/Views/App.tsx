@@ -4,16 +4,18 @@ import { bindActionCreators } from 'redux'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Form from 'react-bootstrap/Form'
+import Spinner from 'react-bootstrap/Spinner';
 import styled from 'styled-components'
 import { ToastContainer, Flip } from 'react-toastify';
 import classNames from 'classnames'
-import { API_URL, PAGES } from 'Constants/constants'
-import Tabs from 'Components/Tabs'
-import Search from 'Components/Search'
-import QuickLinks from 'Components/QuickLinks'
-import Edit from 'Containers/Edit'
-import Admin from 'Containers/Admin'
-import { CategoryType, BookmarkType, LoggedInUser, ActiveCategory } from 'types'
+
+import { API_URL, PAGES } from 'Redux/constants'
+import Tabs from 'Views/Bookmarks/Tabs'
+import QuickLinks from 'Views/Bookmarks/QuickLinks'
+import Search from 'Views/Search/Search'
+import Edit from 'Views/Edit/Edit'
+import Admin from 'Views/Admin/Admin'
+import { LoggedInUser } from 'types'
 import * as editSliceActions from 'Redux/editSlice'
 import * as bookmarksSliceActions from 'Redux/bookmarksSlice'
 import { AppDispatch } from 'Redux/store'
@@ -22,15 +24,10 @@ import { RootState } from 'Redux/rootReducer'
 import 'react-toastify/dist/ReactToastify.css';
 
 interface AppComponentProps {
-  data: CategoryType[]
-  quickLinks: BookmarkType[]
-  editActions: typeof editSliceActions
   bookmarksActions: typeof bookmarksSliceActions
   user: LoggedInUser | null
-  activeCategory: ActiveCategory
   activePage: string
   loading: boolean,
-  search: string,
 }
 
 const AppContainer = styled.div`
@@ -57,16 +54,18 @@ const SearchInput = styled(Form.Control)`
   background-color: #ddd;
 `
 
+const SpinnerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+`
+
 const App: FC<AppComponentProps> = ({
-  data,
-  quickLinks,
-  editActions,
   bookmarksActions,
   user,
-  activeCategory,
   activePage,
   loading,
-  search,
 }: AppComponentProps) => {
   useEffect(() => {
     bookmarksActions.fetchUser()
@@ -90,33 +89,16 @@ const App: FC<AppComponentProps> = ({
   const toggleAdmin = () =>
     bookmarksActions.setActivePage(PAGES.ADMIN)
 
-  const renderBookmarks = () =>
-    <React.Fragment>
-      <QuickLinks
-        data={quickLinks}
-        bookmarksActions={bookmarksActions}
-        activeCategory={activeCategory}
-      />
-      <Tabs
-        data={data}
-        quickLinks={quickLinks}
-        editActions={editActions}
-        bookmarksActions={bookmarksActions}
-        activeCategory={activeCategory}
-      />
-    </React.Fragment>
-
-  const renderSearch = () =>
-    <Search data={data} search={search} />
-
-  const renderEdit = () =>
-    <Edit />
-
-  const renderAdmin = () =>
-    <Admin />
-
   if (!user && !loading) {
     return <div>Unable to load application</div>
+  }
+
+  if (loading) {
+     return (
+       <SpinnerContainer>
+         <Spinner animation="border" />
+       </SpinnerContainer>
+     );
   }
 
   return (
@@ -177,10 +159,15 @@ const App: FC<AppComponentProps> = ({
         </Navbar.Collapse>
       </Navbar>
       <ContentContainer id="bookmarks-content" className="container">
-        {!loading && activePage === PAGES.BOOKMARKS && renderBookmarks()}
-        {!loading && activePage === PAGES.EDIT && renderEdit()}
-        {!loading && activePage === PAGES.ADMIN && renderAdmin()}
-        {!loading && activePage === PAGES.SEARCH && renderSearch()}
+        {activePage === PAGES.BOOKMARKS &&
+          <React.Fragment>
+            <QuickLinks />
+            <Tabs />
+          </React.Fragment>
+        }
+        {activePage === PAGES.EDIT && <Edit />}
+        {activePage === PAGES.ADMIN && <Admin />}
+        {activePage === PAGES.SEARCH && <Search />}
       </ContentContainer>
     </AppContainer>
   )
@@ -193,13 +180,9 @@ const mapDispatchToProps = (dispatch: AppDispatch) => ({
 
 const mapStateToProps = (state: RootState) => {
   return {
-    data: state.bookmarks.data,
-    activeCategory: state.bookmarks.activeCategory,
     activePage: state.bookmarks.activePage,
-    quickLinks: state.bookmarks.quickLinks,
     user: state.bookmarks.user,
     loading: state.bookmarks.loading,
-    search: state.bookmarks.search,
   }
 }
 

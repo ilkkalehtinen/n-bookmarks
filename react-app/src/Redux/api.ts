@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios';
 
-import { API_URL } from 'Constants/constants'
+import { API_URL } from './constants'
 import {
   BookmarksDataType,
   LoggedInUser,

@@ -9,8 +9,8 @@ import * as adminSliceActions from 'Redux/adminSlice'
 import { RootState } from 'Redux/rootReducer'
 import { AppDispatch } from 'Redux/store'
 import { OptionType } from 'types'
-import FormInput from 'Components/FormInput'
-import FormSelect from 'Components/FormSelect'
+import FormInput from 'Common/FormInput'
+import FormSelect from 'Common/FormSelect'
 
 
 const StyledFormLabel = styled(Form.Label)`

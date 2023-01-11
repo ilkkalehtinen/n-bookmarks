@@ -10,10 +10,10 @@ import {
   EditValueAction,
   ChangePassword,
 } from 'types'
-import { API_ACTIONS, PAGES } from 'Constants/constants'
+import { API_ACTIONS, PAGES } from './constants'
 import { AppThunk } from './store'
 import { setToValue } from './utils'
-import { fetchBookmarks, setActivePage} from 'Redux/bookmarksSlice'
+import { fetchBookmarks, setActivePage} from './bookmarksSlice'
 
 export interface EditState {
   addBookmark: EditBookmarkType,

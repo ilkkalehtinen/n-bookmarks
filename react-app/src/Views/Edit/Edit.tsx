@@ -9,9 +9,9 @@ import * as editSliceActions from 'Redux/editSlice'
 import { RootState } from 'Redux/rootReducer'
 import { AppDispatch } from 'Redux/store'
 import { CategoryType, OptionType } from 'types'
-import FormInput from 'Components/FormInput'
-import FormPassword from 'Components/FormPassword'
-import FormSelect from 'Components/FormSelect'
+import FormInput from 'Common/FormInput'
+import FormPassword from 'Common/FormPassword'
+import FormSelect from 'Common/FormSelect'
 
 
 const StyledFormLabel = styled(Form.Label)`

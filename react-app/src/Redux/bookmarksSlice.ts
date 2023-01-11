@@ -9,7 +9,7 @@ import {
   LoggedInUser,
   ActiveCategory,
 } from 'types'
-import { API_ACTIONS, PAGES } from 'Constants/constants'
+import { API_ACTIONS, PAGES } from './constants'
 import { AppThunk } from './store'
 import {
   extractQuickLinks,

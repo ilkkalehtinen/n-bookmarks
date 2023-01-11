@@ -1,9 +1,13 @@
 import React, { FC } from 'react';
 import styled from 'styled-components'
 import { FaSync } from 'react-icons/fa'
+import { bindActionCreators } from 'redux'
+import { AppDispatch } from 'Redux/store'
+import { RootState } from 'Redux/rootReducer'
+import { connect } from 'react-redux'
 
 import * as bookmarksSliceActions from 'Redux/bookmarksSlice'
-import { BookmarkType, ActiveCategory } from 'types'
+import { BookmarkType } from 'types'
 
 const SyncIcon = styled(FaSync)`
   float: right;
@@ -36,19 +40,21 @@ const TopBarContainer = styled.div`
 `
 
 interface QuickLinksComponentProps {
-  data: BookmarkType[]
+  quickLinks: BookmarkType[]
   bookmarksActions: typeof bookmarksSliceActions
-  activeCategory: ActiveCategory
+  note: string
+  noteEdited: boolean
 }
 
 const QuickLinks: FC<QuickLinksComponentProps> = ({
-  data,
+  quickLinks,
   bookmarksActions,
-  activeCategory,
+  note,
+  noteEdited
 }: QuickLinksComponentProps) =>
   <TopBarContainer>
     <StyledQuickLinks>
-      {data.map(bookmark =>
+      {quickLinks.map(bookmark =>
         <a
           key={bookmark.id}
           className="btnCustom"
@@ -59,7 +65,7 @@ const QuickLinks: FC<QuickLinksComponentProps> = ({
       )}
     </StyledQuickLinks>
     <StyledActions>
-      {(activeCategory.note || activeCategory.noteEdited) &&
+      {(note || noteEdited) &&
         <a
           className="btnCustom"
           href=""
@@ -68,10 +74,10 @@ const QuickLinks: FC<QuickLinksComponentProps> = ({
             bookmarksActions.saveNote()
           }}
         >
-          Save note {activeCategory.noteEdited && <span style={{color: 'red'}}>*</span>}
+          Save note {noteEdited && <span style={{color: 'red'}}>*</span>}
         </a>
       }
-      {(!activeCategory.note && !activeCategory.noteEdited) &&
+      {(!note && !noteEdited) &&
         <a
           className="btnCustom"
           href=""
@@ -89,5 +95,16 @@ const QuickLinks: FC<QuickLinksComponentProps> = ({
     />
   </TopBarContainer>
 
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
+  bookmarksActions: bindActionCreators(bookmarksSliceActions, dispatch),
+})
 
-export default QuickLinks
+const mapStateToProps = (state: RootState) => {
+  return {
+    quickLinks: state.bookmarks.quickLinks,
+    noteEdited: state.bookmarks.activeCategory.noteEdited,
+    note: state.bookmarks.activeCategory.note,
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuickLinks)

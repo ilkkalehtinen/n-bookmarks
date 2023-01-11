@@ -3,19 +3,23 @@ import Tab from 'react-bootstrap/Tab'
 import ListGroup from 'react-bootstrap/ListGroup'
 import styled from 'styled-components'
 import { FaTrashAlt } from 'react-icons/fa'
-import Form from 'react-bootstrap/Form'
 import Nav from 'react-bootstrap/Nav'
+import { bindActionCreators } from 'redux'
+import { AppDispatch } from 'Redux/store'
+import { RootState } from 'Redux/rootReducer'
+import { connect } from 'react-redux'
 
-import { CategoryType, BookmarkType, ActiveCategory } from 'types'
+import { CategoryType } from 'types'
 import * as editSliceActions from 'Redux/editSlice'
 import * as bookmarksSliceActions from 'Redux/bookmarksSlice'
 
+import Textarea from "./Textarea"
+
 interface TabsComponentProps {
   data: CategoryType[],
-  quickLinks: BookmarkType[],
   editActions: typeof editSliceActions,
   bookmarksActions: typeof bookmarksSliceActions
-  activeCategory: ActiveCategory
+  activeCategoryName: string
 }
 
 const DeleteIcon = styled(FaTrashAlt)`
@@ -31,27 +35,27 @@ const TabContent = styled.div`
   height: 100%;
 `
 
-const StyledFormGroup = styled(Form.Group)`
-  flex: 1;
-`
-
 const TabsComponent: FC<TabsComponentProps> = ({
   data,
   editActions,
   bookmarksActions,
-  activeCategory,
+  activeCategoryName,
 }: TabsComponentProps) => {
   const deleteBookmark = (bookmarkId: string) => () => {
     editActions.deleteBookmarkAndUpdate(bookmarkId)
   }
 
   return (
-    <Tab.Container id="left-tabs-example" defaultActiveKey={activeCategory.name}>
+    <Tab.Container id="left-tabs-example" defaultActiveKey={activeCategoryName}>
       <Nav>
         {data.map(category =>
           <Nav.Item
             key={category.id}
-            onClick={() => bookmarksActions.setActiveCategory(category.id)}
+            // eslint-disable-next-line
+            onClick={(e: any) => {
+              e.preventDefault();
+              bookmarksActions.setActiveCategory(category.id)
+            }}
           >
             <Nav.Link eventKey={category.category}>{category.category}</Nav.Link>
           </Nav.Item>
@@ -71,34 +75,7 @@ const TabsComponent: FC<TabsComponentProps> = ({
                   </ListGroup.Item>
                 )}
               </ListGroup>
-              {(activeCategory.note || activeCategory.noteEdited) &&
-                <StyledFormGroup>
-                  <Form.Control
-                    as="textarea"
-                    value={activeCategory.note}
-                    onChange={(e) =>
-                      bookmarksActions.editNote(e.target.value)
-                    }
-                    // eslint-disable-next-line
-                    onKeyDown={(e: any) => {
-                      if ((e.ctrlKey || e.metaKey) && e.which === 83) {
-                        bookmarksActions.saveNote()
-                        e.preventDefault()
-                      } else if (e.keyCode === 9) {
-                        const val = activeCategory.note
-                        const start = e.target.selectionStart
-                        const end = e.target.selectionEnd
-                        const editedNote = val.substring(0, start) + '\t' + val.substring(end)
-                        bookmarksActions.editNote(editedNote)
-                        setTimeout(() => {
-                          e.target.selectionStart = e.target.selectionEnd = start + 1
-                        })
-                        e.preventDefault()
-                      }}
-                    }
-                  />
-                </StyledFormGroup>
-              }
+              <Textarea />
             </TabContent>
           </Tab.Pane>
         )}
@@ -107,4 +84,16 @@ const TabsComponent: FC<TabsComponentProps> = ({
   )
 }
 
-export default TabsComponent
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
+  editActions: bindActionCreators(editSliceActions, dispatch),
+  bookmarksActions: bindActionCreators(bookmarksSliceActions, dispatch),
+})
+
+const mapStateToProps = (state: RootState) => {
+  return {
+    data: state.bookmarks.data,
+    activeCategoryName: state.bookmarks.activeCategory.name,
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TabsComponent)

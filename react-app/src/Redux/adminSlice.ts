@@ -11,7 +11,7 @@ import {
   AddUserType,
   LoggedInUser,
 } from 'types'
-import { API_ACTIONS } from 'Constants/constants'
+import { API_ACTIONS } from './constants'
 import { AppThunk } from './store'
 import { setToValue } from './utils'
 

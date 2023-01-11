@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
 import ListGroup from 'react-bootstrap/ListGroup'
+import { RootState } from 'Redux/rootReducer'
+import { connect } from 'react-redux'
 
 import { CategoryType, BookmarkType } from 'types'
 
@@ -33,4 +35,11 @@ const SearchComponent: FC<SearchComponentProps> = ({
   )
 }
 
-export default SearchComponent
+const mapStateToProps = (state: RootState) => {
+  return {
+    data: state.bookmarks.data,
+    search: state.bookmarks.search,
+  }
+}
+
+export default connect(mapStateToProps)(SearchComponent)
