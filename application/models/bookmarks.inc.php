@@ -42,7 +42,7 @@ class Bookmark implements JsonSerializable
         return $this->url;
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize():mixed {
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -89,7 +89,7 @@ class Category implements JsonSerializable
         return $this->bookmarks;
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize():mixed {
         return [
             'id' => $this->id,
             'category' => $this->name,
@@ -235,7 +235,7 @@ class Bookmarks implements JsonSerializable
         return json_encode($this);
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize():mixed {
         return [
             'bookmarks' => $this->data,
             'etag' => $this->etag
