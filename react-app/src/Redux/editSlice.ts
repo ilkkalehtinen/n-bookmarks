@@ -1,3 +1,10 @@
+/**
+ * This file is part of nBookmarks.
+ * Copyright (c) 2023 Ilkka Lehtinen
+ *
+ * For the full copyright and license information, please view the license.txt
+ * file that was distributed with this source code.
+ */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify';
 
@@ -9,6 +16,7 @@ import {
   EditCategoryType,
   EditValueAction,
   ChangePassword,
+  UploadData,
 } from 'types'
 import { API_ACTIONS, PAGES } from './constants'
 import { AppThunk } from './store'
@@ -22,6 +30,7 @@ export interface EditState {
   removeCategory: EditCategoryType,
   modifyCategory: EditCategoryType,
   changePassword: ChangePassword,
+  uploadData: UploadData,
 }
 
 const initialState: EditState = {
@@ -49,6 +58,9 @@ const initialState: EditState = {
   },
   changePassword: {
     password: '',
+  },
+  uploadData: {
+    data: '',
   },
 }
 
@@ -166,5 +178,20 @@ export const changePassword = (): AppThunk => async (dispatch, getState) => {
     toast.success("Password changed");
   } catch (e) {
     toast.error("Password changing failed");
+  }
+}
+
+export const uploadData = (): AppThunk => async (dispatch, getState) => {
+  const etag = getState().bookmarks.etag
+  const payload = {
+    data: JSON.stringify(getState().edit.uploadData.data),
+  }
+  try {
+    await bookmarkAction(etag, payload, API_ACTIONS.UPLOAD_DATA)
+    dispatch(clearValues())
+    dispatch(setActivePage(PAGES.BOOKMARKS))
+    toast.success("Data uploaded");
+  } catch (e) {
+    toast.error("Data upload failed");
   }
 }

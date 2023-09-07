@@ -37,7 +37,7 @@
   },
   "scripts": {
     "start": "BROWSER=none react-scripts start",
-    "build": "react-scripts build && if [ -d '../static' ]; then rm -r ../static; fi && mv build/* ../",
+    "build": "react-scripts build && if [ -d '../public/static' ]; then rm -r ../public/static; fi && mv build/* ../public",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --ext=js,jsx,ts,tsx src"

@@ -2,7 +2,7 @@
 
 ![bookmarks](./images/bookmarks.png)
 
-nBookmarks is an application to maintain list of bookmarks and notes. It has been implemented with CodeIgniter 3.x (REST API), React, and Twitter Bootstrap.
+nBookmarks is an application to maintain list of bookmarks and notes. It has been implemented with CodeIgniter 4 (REST API), React, and Twitter Bootstrap.
 
 ## Features
 
@@ -15,20 +15,19 @@ nBookmarks is an application to maintain list of bookmarks and notes. It has bee
 
 ## Installation
 
-CodeIgniter [installation instructions](https://codeigniter.com/userguide3/installation/index.html)
+CodeIgniter [installation instructions](https://codeigniter.com/user_guide/installation/index.html)
 
 ### Basic setup
 
-1. Define database settings: `/application/config/database.php`
+1. Define database settings: `/app/Config/Database.php`
 2. Create DB table with `/data/users.sql`
-3. Set encryption key: `/application/config/config.php`, `$config['encryption_key']`
+3. Set encryption key: `/app/Config/Encryption.php`, `$key`
 4. Build react-app: `npm install && npm run build`
 
 ### Changing base URL
 
-1. Change `$config['base_url']` in `/application/config/config.php`
-2. Change `REACT_APP_API_URL` in `/application/react-app/.env`
-3. (Change default static resources location in `/application/controllers/Home.php` and package.json's `homepage` field.)
+1. Change `$baseURL` in `/app/Config/App.php`
+2. Change `REACT_APP_API_URL` in `/react-app/.env`
 
 ### Todo
 

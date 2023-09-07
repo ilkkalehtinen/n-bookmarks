@@ -1,3 +1,10 @@
+/**
+ * This file is part of nBookmarks.
+ * Copyright (c) 2023 Ilkka Lehtinen
+ *
+ * For the full copyright and license information, please view the license.txt
+ * file that was distributed with this source code.
+ */
 import React, { FC } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -199,6 +206,23 @@ const Edit: FC<EditComponentProps> = ({ bookmarkData, editData, editActions }: E
           onClick={editActions.modifyCategoryAndUpdate}
         >
           Modify
+        </StyledButton>
+      </Form>
+      <Form inline>
+        <StyledFormLabel>Upload data</StyledFormLabel>
+        <FormInput
+          value={editData.uploadData.data}
+          onChange={onChange(['uploadData', 'data'])}
+          placeholder="Upload data"
+        />
+        <StyledButton
+          className="m-2"
+          disabled={
+            !editData.uploadData.data
+          }
+          onClick={editActions.uploadData}
+        >
+          Upload
         </StyledButton>
       </Form>
       <Form inline>

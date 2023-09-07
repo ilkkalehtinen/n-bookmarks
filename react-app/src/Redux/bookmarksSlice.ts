@@ -1,3 +1,10 @@
+/**
+ * This file is part of nBookmarks.
+ * Copyright (c) 2023 Ilkka Lehtinen
+ *
+ * For the full copyright and license information, please view the license.txt
+ * file that was distributed with this source code.
+ */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify';
 
@@ -118,6 +125,9 @@ export const fetchBookmarks = (): AppThunk => async dispatch => {
 export const fetchUser = (): AppThunk => async dispatch => {
   try {
     const user = await getUser()
+    if (!user?.id) {
+      window.location.href = "/login";
+    }
     dispatch(initUser(user))
   } catch (e) {
     toast.error("Fetching user data failed.");

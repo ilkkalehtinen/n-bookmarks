@@ -1,3 +1,10 @@
+/**
+ * This file is part of nBookmarks.
+ * Copyright (c) 2023 Ilkka Lehtinen
+ *
+ * For the full copyright and license information, please view the license.txt
+ * file that was distributed with this source code.
+ */
 export const API_URL = process.env.REACT_APP_API_URL;
 
 export const API_ACTIONS = {
@@ -11,6 +18,7 @@ export const API_ACTIONS = {
   REMOVE_BOOKMARK: 'removeBookmark',
 
   CHANGE_PASSWORD: 'change-password',
+  UPLOAD_DATA: 'upload-data',
   ADD_USER: 'add-user',
   ADMIN_CHANGE_PASSWORD: 'admin-change-password',
   REMOVE_USER: 'remove-user',
