@@ -14,7 +14,7 @@ class Home extends BaseController {
     {
         if (!session()->get('isLoggedIn'))
         {
-            return redirect()->to('/login');
+            return redirect()->to(site_url('login'));
         }
     }
 
@@ -25,7 +25,7 @@ class Home extends BaseController {
         $session->set('isLoggedIn', FALSE);
         $session->destroy();
 
-        return redirect()->to('/login');
+        return redirect()->to(site_url('login'));
     }
 
 }

@@ -44,7 +44,7 @@
     <div class="content">
       <h1>Bookmarks login</h1>
       <?= validation_list_errors() ?>
-      <form action="/verifylogin" method="post">
+      <form action="<?= site_url('verifylogin') ?>" method="post">
         <?= csrf_field() ?>
         <label for="username">Username:</label>
         <input type="text" size="20" id="username" name="username" value="<?= set_value('username') ?>"/>

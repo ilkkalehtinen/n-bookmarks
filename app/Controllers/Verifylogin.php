@@ -43,7 +43,7 @@ class Verifylogin extends BaseController {
             ];
             $session->set($session_data);
 
-            return redirect()->to('/');
+            return redirect()->to(base_url());
           } else {
             $this->validator->setError("username", "Invalid user!");
             return view('login_view');
