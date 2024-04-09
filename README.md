@@ -19,15 +19,10 @@ CodeIgniter [installation instructions](https://codeigniter.com/user_guide/insta
 
 ### Basic setup
 
-1. Define database settings: `/app/Config/Database.php`
-2. Create DB table with `/data/users.sql`
-3. Set encryption key: `/app/Config/Encryption.php`, `$key`
+1. Create DB table with `data/users.sql`
+2. Create server configuration (e.g. Apache VirtualHost `data/bookmarks.com.conf`)
+3. Modify `.env` and `react-app/.env` according to set-up
 4. Build react-app: `npm install && npm run build`
-
-### Changing base URL
-
-1. Change `$baseURL` in `/app/Config/App.php`
-2. Change `REACT_APP_API_URL` in `/react-app/.env`
 
 ### Todo
 
