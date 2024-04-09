@@ -14,13 +14,19 @@ interface FormInputProps {
   onChange(e: React.ChangeEvent<HTMLInputElement>): void;
 }
 
-const FormInput: FC<FormInputProps> = ({ placeholder, value, onChange }: FormInputProps) =>
+const FormInput: FC<FormInputProps> = ({
+  placeholder,
+  value,
+  onChange,
+  ...rest
+}: FormInputProps) =>
   <Form.Control
     className="m-2 flex-grow-1"
     type="input"
     placeholder={placeholder}
     value={value}
     onChange={onChange}
+    {...rest}
   />
 
 export default FormInput

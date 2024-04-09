@@ -78,6 +78,7 @@ const TabsComponent: FC<TabsComponentProps> = ({
                     <a href={bookmark.url}>{bookmark.name}</a>
                     <DeleteIcon
                       onClick={deleteBookmark(bookmark.id)}
+                      data-cy={bookmark.url}
                     />
                   </ListGroup.Item>
                 )}

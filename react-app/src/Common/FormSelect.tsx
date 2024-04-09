@@ -16,7 +16,12 @@ interface FormSelectProps {
   options: OptionType[]
 }
 
-const FormSelect: FC<FormSelectProps> = ({ placeholder, onChange, options }: FormSelectProps) => {
+const FormSelect: FC<FormSelectProps> = ({
+  placeholder,
+  onChange,
+  options,
+  ...rest
+}: FormSelectProps) => {
   const renderOptions = [
     <option key={null} value={''}>--</option>
   ].concat(options.map(option =>
@@ -29,6 +34,7 @@ const FormSelect: FC<FormSelectProps> = ({ placeholder, onChange, options }: For
       className="m-2 flex-grow-1"
       placeholder={placeholder}
       onChange={onChange}
+      {...rest}
     >
       {renderOptions}
     </Form.Control>

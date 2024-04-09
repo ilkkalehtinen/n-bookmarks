@@ -91,16 +91,19 @@ const Edit: FC<EditComponentProps> = ({ bookmarkData, editData, editActions }: E
           value={editData.addBookmark.url}
           onChange={onChange(['addBookmark', 'url'])}
           placeholder="Url"
+          data-cy="add-bookmark-url"
         />
         <FormInput
           value={editData.addBookmark.name}
           onChange={onChange(['addBookmark', 'name'])}
           placeholder="Name"
+          data-cy="add-bookmark-name"
         />
         <FormSelect
           onChange={onChange(['addBookmark', 'category'])}
           placeholder="Category"
           options={categories}
+          data-cy="add-bookmark-category"
         />
         <StyledButton
           className="m-2"
@@ -110,6 +113,7 @@ const Edit: FC<EditComponentProps> = ({ bookmarkData, editData, editActions }: E
             !editData.addBookmark.category
           }
           onClick={editActions.addBookmarkAndUpdate}
+          data-cy="add-bookmark-add"
         >
           Add
         </StyledButton>
@@ -120,6 +124,7 @@ const Edit: FC<EditComponentProps> = ({ bookmarkData, editData, editActions }: E
           onChange={onSelectBookmark}
           placeholder="Category"
           options={bookmarks}
+          data-cy="modify-bookmark-bookmark"
         />
       </Form>
       <Form inline>
@@ -128,16 +133,19 @@ const Edit: FC<EditComponentProps> = ({ bookmarkData, editData, editActions }: E
           value={editData.modifyBookmark.url}
           onChange={onChange(['modifyBookmark', 'url'])}
           placeholder="Url"
+          data-cy="modify-bookmark-url"
         />
         <FormInput
           value={editData.modifyBookmark.name}
           onChange={onChange(['modifyBookmark', 'name'])}
           placeholder="Name"
+          data-cy="modify-bookmark-name"
         />
         <FormSelect
           onChange={onChange(['modifyBookmark', 'category'])}
           placeholder="Category"
           options={categories}
+          data-cy="modify-bookmark-bookmark"
         />
         <StyledButton
           className="m-2"
@@ -147,6 +155,7 @@ const Edit: FC<EditComponentProps> = ({ bookmarkData, editData, editActions }: E
             !editData.modifyBookmark.category
           }
           onClick={editActions.modifyBookmarkAndUpdate}
+          data-cy="modify-bookmark-modify"
         >
           Modify
         </StyledButton>
@@ -157,6 +166,7 @@ const Edit: FC<EditComponentProps> = ({ bookmarkData, editData, editActions }: E
           value={editData.addCategory.name}
           onChange={onChange(['addCategory', 'name'])}
           placeholder="Name"
+          data-cy="add-category-name"
         />
         <StyledButton
           className="m-2"
@@ -164,6 +174,7 @@ const Edit: FC<EditComponentProps> = ({ bookmarkData, editData, editActions }: E
             !editData.addCategory.name
           }
           onClick={editActions.addCategoryAndUpdate}
+          data-cy="add-category-add"
         >
           Add
         </StyledButton>
@@ -174,6 +185,7 @@ const Edit: FC<EditComponentProps> = ({ bookmarkData, editData, editActions }: E
           onChange={onChange(['removeCategory', 'id'])}
           placeholder="Category"
           options={categories}
+          data-cy="remove-category-name"
         />
         <StyledButton
           className="m-2"
@@ -181,6 +193,7 @@ const Edit: FC<EditComponentProps> = ({ bookmarkData, editData, editActions }: E
             !editData.removeCategory.id
           }
           onClick={editActions.removeCategoryAndUpdate}
+          data-cy="remove-category-remove"
         >
           Remove
         </StyledButton>
@@ -191,11 +204,13 @@ const Edit: FC<EditComponentProps> = ({ bookmarkData, editData, editActions }: E
           onChange={onChange(['modifyCategory', 'id'])}
           placeholder="Category"
           options={categories}
+          data-cy="modify-category-name"
         />
         <FormInput
           value={editData.modifyCategory.name}
           onChange={onChange(['modifyCategory', 'name'])}
           placeholder="Name"
+          data-cy="modify-category-new-name"
         />
         <StyledButton
           className="m-2"
@@ -204,6 +219,7 @@ const Edit: FC<EditComponentProps> = ({ bookmarkData, editData, editActions }: E
             !editData.modifyCategory.name
           }
           onClick={editActions.modifyCategoryAndUpdate}
+          data-cy="modify-category-modify"
         >
           Modify
         </StyledButton>
@@ -214,6 +230,7 @@ const Edit: FC<EditComponentProps> = ({ bookmarkData, editData, editActions }: E
           value={editData.uploadData.data}
           onChange={onChange(['uploadData', 'data'])}
           placeholder="Upload data"
+          data-cy="upload-data-data"
         />
         <StyledButton
           className="m-2"
@@ -221,6 +238,7 @@ const Edit: FC<EditComponentProps> = ({ bookmarkData, editData, editActions }: E
             !editData.uploadData.data
           }
           onClick={editActions.uploadData}
+          data-cy="upload-data-upload"
         >
           Upload
         </StyledButton>
@@ -231,6 +249,7 @@ const Edit: FC<EditComponentProps> = ({ bookmarkData, editData, editActions }: E
           value={editData.changePassword.password}
           onChange={onChange(['changePassword', 'password'])}
           placeholder="Password"
+          data-cy="change-password-password"
         />
         <StyledButton
           className="m-2"
@@ -238,6 +257,7 @@ const Edit: FC<EditComponentProps> = ({ bookmarkData, editData, editActions }: E
             !editData.changePassword.password
           }
           onClick={editActions.changePassword}
+          data-cy="change-password-change"
         >
           Change
         </StyledButton>

@@ -10,7 +10,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta
+      name="viewport"
+      content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
     <style>
       body {
         margin: 0;
@@ -47,11 +50,28 @@
       <form action="<?= site_url('verifylogin') ?>" method="post">
         <?= csrf_field() ?>
         <label for="username">Username:</label>
-        <input type="text" size="20" id="username" name="username" value="<?= set_value('username') ?>"/>
+        <input
+          type="text"
+          size="20"
+          name="username"
+          data-cy="username"
+          value="<?= set_value('username') ?>"
+        />
         <br/>
         <label for="password">Password:</label>
-        <input type="password" size="20" id="passowrd" name="password" value="<?= set_value('password') ?>"/>
-        <input type="submit" value="Login" class="button"/>
+        <input
+          type="password"
+          size="20"
+          name="password"
+          data-cy="password"
+          value="<?= set_value('password') ?>"
+        />
+        <input
+          type="submit"
+          value="Login"
+          class="button"
+          data-cy="submit"
+        />
       </form>
     </div>
   </body>
