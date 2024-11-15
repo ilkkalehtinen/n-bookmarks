@@ -126,7 +126,7 @@ export const fetchUser = (): AppThunk => async dispatch => {
   try {
     const user = await getUser()
     if (!user?.id) {
-      window.location.href = "/login";
+      window.location.href = "/index.php/login";
     }
     dispatch(initUser(user))
   } catch (e) {
